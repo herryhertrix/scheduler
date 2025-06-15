@@ -1,0 +1,26 @@
+# ⛔ Abaikan virtual environment
+venv/
+
+# ⛔ Abaikan file build/package
+build/
+rocketry_scheduler.egg-info/
+
+# ⛔ Abaikan archive lokal
+Archive.zip
+
+# ⛔ Abaikan cache Python
+__pycache__/
+*.py[cod]
+
+# ⛔ Abaikan log & file sementara
+*.log
+*.pid
+
+# ⛔ Abaikan file editor & OS
+.DS_Store
+.vscode/
+.idea/
+
+# ⛔ Abaikan env file kalau pakai dotenv
+.env
+*.env
