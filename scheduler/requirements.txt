@@ -1,2 +1,0 @@
-rocketry
-requests
