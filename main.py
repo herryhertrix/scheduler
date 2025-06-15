@@ -15,7 +15,11 @@ app = Rocketry()
 def trigger_webhook():
     print("🚀 Menjalankan webhook...")
     try:
-        response = requests.get("https://admin.tokosusun.com/webhooks/workflows", timeout=10)
+        response = requests.get(
+            "https://admin.tokosusun.com/webhooks/workflows",
+            timeout=10,
+            verify=False
+        )
         print(f"✅ Sukses: {response.status_code} - {response.text}")
         logging.info(f"Webhook sukses: {response.status_code} - {response.text}")
     except Exception as e:
