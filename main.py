@@ -12,7 +12,8 @@ logging.basicConfig(
 # Gunakan zona waktu Jakarta
 app = Rocketry(config={"timezone": "Asia/Jakarta"})
 
-@app.task(cron("0 9-20 * * *"))
+# @app.task(cron("0 9-20 * * *"))
+@app.task(cron("* * * * *"))
 def trigger_webhook():
     print("🚀 Menjalankan webhook...")
     try:
