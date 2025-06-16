@@ -1,21 +1,15 @@
-import warnings
 from rocketry import Rocketry
 from rocketry.conds import cron
 import requests
 import logging
-import urllib3
 
-# Hilangkan warning SSL & future warning
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-warnings.filterwarnings("ignore", category=FutureWarning)
-
-# Logging
+# Logging ke stdout dan file
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Rocketry setup
+# Gunakan zona waktu Jakarta
 app = Rocketry(config={"timezone": "Asia/Jakarta"})
 
 @app.task(cron("0 9-20 * * *"))
