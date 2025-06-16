@@ -1,11 +1,13 @@
+import warnings
 from rocketry import Rocketry
 from rocketry.conds import cron
 import requests
 import logging
 import urllib3
 
-# Matikan warning SSL
+# Hilangkan warning SSL & future warning
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 # Logging
 logging.basicConfig(
@@ -13,8 +15,8 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Rocketry dengan zona waktu & eksekusi eksplisit
-app = Rocketry(config={"timezone": "Asia/Jakarta"}, task_execution="async")
+# Rocketry setup
+app = Rocketry(config={"timezone": "Asia/Jakarta"})
 
 @app.task(cron("0 9-20 * * *"))
 def trigger_webhook():
@@ -23,7 +25,7 @@ def trigger_webhook():
         response = requests.get(
             "http://admin.tokosusun.com/webhooks/workflows",
             timeout=10,
-            verify=False  # self-signed SSL accepted
+            verify=False
         )
         print(f"✅ Sukses: {response.status_code} - {response.text}")
         logging.info(f"Webhook sukses: {response.status_code} - {response.text}")
