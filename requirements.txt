@@ -1,3 +1,4 @@
 rocketry==2.4.0
 requests
 pydantic<2.0
+pendulum
