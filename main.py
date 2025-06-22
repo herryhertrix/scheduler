@@ -38,7 +38,7 @@ def notify_telegram():
         print("📨 Mengirim notifikasi Telegram...")
         try:
             response = requests.get(
-                "http://localhost:9000/webhooks/telegram/notify",
+                "http://admin.tokosusun.com/webhooks/telegram/notify",
                 timeout=10,
                 verify=False
             )
