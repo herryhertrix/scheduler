@@ -13,7 +13,7 @@ logging.basicConfig(
 app = Rocketry()
 
 # Task 1: Setiap jam
-@app.task(cron("0 * * * *"))
+@app.task(cron("*/10 * * * *"))
 def trigger_webhook():
     print("🚀 Menjalankan webhook workflows...")
     try:
