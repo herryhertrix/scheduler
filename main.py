@@ -37,7 +37,8 @@ def trigger_webhook():
 def notify_telegram():
     now = pendulum.now("Asia/Jakarta")
     current_hour = now.hour
-
+    current_minute = now.minute 
+    current_weekday = now.weekday()
     if 9 <= current_hour <= 21:
         print("📨 Mengirim notifikasi Telegram...")
         try:
@@ -53,11 +54,11 @@ def notify_telegram():
             logging.error(f"Telegram notify gagal: {e}")
 
     # Tambahan: Withdraw jam 01:00 dan Inventory jam 06:00
-    if current_hour == 1:
+    if current_hour == 1 and current_minute == 0:
         print("🏦 Menjalankan withdraw workflows (01:00)...")
         try:
             response = requests.get(
-                "http://admin.tokosusun.com/webhooks/workflows/withdraw",
+                "http://admin.tokosusun.com/webhooks/workflows/inventory",
                 timeout=10,
                 verify=False
             )
@@ -66,11 +67,11 @@ def notify_telegram():
         except Exception as e:
             print(f"❌ Withdraw gagal: {e}")
             logging.error(f"Withdraw gagal: {e}")
-    elif current_hour == 6:
-        print("📦 Menjalankan inventory workflows (06:00)...")
+    elif current_hour == 6 and current_minute == 0 and 1 <= current_weekday <= 4:
+        print("📦 Menjalankan inventory workflows (06:00 Selasa-Jumat)...")
         try:
             response = requests.get(
-                "http://admin.tokosusun.com/webhooks/workflows/inventory",
+                "http://admin.tokosusun.com/webhooks/workflows/withdraw",
                 timeout=10,
                 verify=False
             )
