@@ -18,7 +18,7 @@ def trigger_webhook():
     now = pendulum.now("Asia/Jakarta")
     current_hour = now.hour
     
-    if 9 <= current_hour <= 21:
+    if 8 <= current_hour <= 21:
         print("🚀 Menjalankan webhook workflows...")
         try:
             response = requests.get(
@@ -39,7 +39,7 @@ def notify_telegram():
     current_hour = now.hour
     current_minute = now.minute 
     current_weekday = now.weekday()
-    if 9 <= current_hour <= 21:
+    if 8 <= current_hour <= 21:
         print("📨 Mengirim notifikasi Telegram...")
         try:
             response = requests.get(
@@ -55,18 +55,18 @@ def notify_telegram():
 
     # Tambahan: Withdraw jam 01:00 dan Inventory jam 06:00
     if current_hour == 1 and current_minute == 0:
-        print("🏦 Menjalankan withdraw workflows (01:00)...")
+        print("🏦 Menjalankan inventory workflows (01:00)...")
         try:
             response = requests.get(
                 "http://admin.tokosusun.com/webhooks/workflows/inventory",
                 timeout=10,
                 verify=False
             )
-            print(f"✅ Withdraw sukses: {response.status_code} - {response.text}")
-            logging.info(f"Withdraw sukses: {response.status_code} - {response.text}")
+            print(f"✅ inventory sukses: {response.status_code} - {response.text}")
+            logging.info(f"inventory sukses: {response.status_code} - {response.text}")
         except Exception as e:
-            print(f"❌ Withdraw gagal: {e}")
-            logging.error(f"Withdraw gagal: {e}")
+            print(f"❌ inventory gagal: {e}")
+            logging.error(f"inventory gagal: {e}")
     elif current_hour == 6 and current_minute == 0 and 1 <= current_weekday <= 4:
         print("📦 Menjalankan inventory workflows (06:00 Selasa-Jumat)...")
         try:
@@ -75,11 +75,11 @@ def notify_telegram():
                 timeout=10,
                 verify=False
             )
-            print(f"✅ Inventory sukses: {response.status_code} - {response.text}")
-            logging.info(f"Inventory sukses: {response.status_code} - {response.text}")
+            print(f"✅ withdraw sukses: {response.status_code} - {response.text}")
+            logging.info(f"withdraw sukses: {response.status_code} - {response.text}")
         except Exception as e:
-            print(f"❌ Inventory gagal: {e}")
-            logging.error(f"Inventory gagal: {e}")
+            print(f"❌ withdraw gagal: {e}")
+            logging.error(f"withdraw gagal: {e}")
 
 if __name__ == "__main__":
     app.run()
