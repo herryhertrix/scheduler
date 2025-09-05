@@ -18,7 +18,7 @@ def trigger_webhook():
     now = pendulum.now("Asia/Jakarta")
     current_hour = now.hour
     
-    if 8 <= current_hour <= 21:
+    if 8 <= current_hour <= 22:
         print("🚀 Menjalankan webhook workflows...")
         try:
             response = requests.get(
@@ -39,7 +39,7 @@ def notify_telegram():
     current_hour = now.hour
     current_minute = now.minute 
     current_weekday = now.weekday()
-    if 8 <= current_hour <= 21:
+    if 8 <= current_hour <= 22:
         print("📨 Mengirim notifikasi Telegram...")
         try:
             response = requests.get(
