@@ -18,7 +18,7 @@ def trigger_webhook():
     now = pendulum.now("Asia/Jakarta")
     current_hour = now.hour
     
-    if 8 <= current_hour <= 22:
+    if 6 <= current_hour <= 22:
         print("🚀 Menjalankan webhook workflows...")
         try:
             response = requests.get(
@@ -39,7 +39,7 @@ def notify_telegram():
     current_hour = now.hour
     current_minute = now.minute 
     current_weekday = now.weekday()
-    if 8 <= current_hour <= 22:
+    if 6 <= current_hour <= 22:
         print("📨 Mengirim notifikasi Telegram...")
         try:
             response = requests.get(
@@ -67,7 +67,7 @@ def notify_telegram():
         except Exception as e:
             print(f"❌ inventory gagal: {e}")
             logging.error(f"inventory gagal: {e}")
-    elif current_hour == 6 and current_minute == 0 and 1 <= current_weekday <= 4:
+    elif current_hour == 5 and current_minute == 0 and 1 <= current_weekday <= 4:
         print("📦 Menjalankan inventory workflows (06:00 Selasa-Jumat)...")
         try:
             response = requests.get(
